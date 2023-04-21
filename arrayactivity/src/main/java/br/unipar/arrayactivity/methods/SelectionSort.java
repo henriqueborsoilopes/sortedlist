@@ -2,9 +2,9 @@ package br.unipar.arrayactivity.methods;
 
 public class SelectionSort {
 
-    static int[] sortVector;
-    static long timeStart;
-    static long timeEnd;
+	private static int[] sortVector;
+	private static long timeStart;
+	private static long timeEnd;
 
     public static void selectionSort(int[] vector) {
         timeStart = System.currentTimeMillis();
@@ -25,15 +25,13 @@ public class SelectionSort {
         sortVector = vector;
     }
     
-    public static int[] getSortVector() {
-        return sortVector;
+    public static void showSortVector() {
+        for (int i = 0; i < sortVector.length; i++) {
+            System.out.println("posição[" + i + "] = " + sortVector[i]);
+        }
     }
 
-    public static long getTimeStart() {
-        return timeStart;
-    }
-
-    public static long getTimeEnd() {
-        return timeEnd;
+    public static void showExecutionTime() {
+    	System.out.println("Tempo de execução por Ordenação Seleção: " + (timeStart - timeEnd));
     }
 }

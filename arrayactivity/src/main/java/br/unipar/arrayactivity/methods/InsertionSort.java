@@ -2,9 +2,9 @@ package br.unipar.arrayactivity.methods;
 
 public class InsertionSort {
     
-    static int[] sortVector;
-    static long timeStart;
-    static long timeEnd;
+	private static int[] sortVector;
+	private  static long timeStart;
+	private static long timeEnd;
 
     public static void insertionSort(int[] vector) {
         timeStart = System.currentTimeMillis();
@@ -19,16 +19,14 @@ public class InsertionSort {
         timeEnd = System.currentTimeMillis();
         sortVector = vector;
     }
-
-    public static int[] getSortVector() {
-        return sortVector;
+    
+    public static void showSortVector() {
+        for (int i = 0; i < sortVector.length; i++) {
+            System.out.println("posição[" + i + "] = " + sortVector[i]);
+        }
     }
 
-    public static long getTimeStart() {
-        return timeStart;
-    }
-
-    public static long getTimeEnd() {
-        return timeEnd;
+    public static void showExecutionTime() {
+    	System.out.println("Tempo de execução por Ordenação Inserção: " + (timeStart - timeEnd));
     }
 }

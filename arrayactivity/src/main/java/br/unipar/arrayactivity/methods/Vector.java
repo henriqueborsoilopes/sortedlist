@@ -2,7 +2,7 @@ package br.unipar.arrayactivity.methods;
 
 public class Vector {
 
-    static int[] vector;
+	private static int[] vector;
 
     public static int[] getVector() {
         return vector;
@@ -16,17 +16,9 @@ public class Vector {
         vector[position] = value;
     }
 
-    public static void printOutOriginalVector() {
+    public static void showSortVector() {
         for (int i = 0; i < vector.length; i++) {
-            System.out.println("vetor[" + i + "] = " + vector[i]);
+            System.out.println("posição[" + i + "] = " + vector[i]);
         }
-    }
-
-    public static void printOutSortVector(long timeStart, long timeEnd, int[] sortVector) {
-        for (int i = 0; i < sortVector.length; i++) {
-            System.out.println("vetor[" + i + "] = " + sortVector[i]);
-        }
-        System.out.println();
-        System.out.println("Demorou " + (timeStart - timeEnd) + " milésimos para executar essa ordenação.");
     }
 }
