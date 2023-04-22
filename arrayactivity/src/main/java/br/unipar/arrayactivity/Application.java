@@ -15,7 +15,6 @@ public class Application {
     	    	UI.executeAllSortMethods();
     	    	UI.askSortVectorOption();
     	    	UI.showExecutionTimeAllSort();
-    	    	UI.showOriginalVector();
     		} while (UI.showContinuoQuestion());
     	} catch (DataTypeException e) {
     		System.out.print(e.getMessage());
