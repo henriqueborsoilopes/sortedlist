@@ -11,8 +11,7 @@ public class Application {
     		do {
         		UI.askVectorSize();
     	    	UI.askVectorValues();
-    	    	UI.showOriginalVector();
-    	    	UI.executeAllSortMethods();
+    	    	UI.executeAllSortsMethods();
     	    	UI.askSortVectorOption();
     	    	UI.showExecutionTimeAllSort();
     		} while (UI.showContinuoQuestion());

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import br.unipar.arrayactivity.methods.BubbleSort;
 import br.unipar.arrayactivity.methods.InsertionSort;
 import br.unipar.arrayactivity.methods.SelectionSort;
-import br.unipar.arrayactivity.methods.Vector;
+import br.unipar.arrayactivity.methods.Sort;
 import br.unipar.arrayactivity.ui.exceptions.DataTypeException;
 import br.unipar.arrayactivity.ui.exceptions.ValueChooseException;
 
@@ -14,32 +14,39 @@ public class UI {
 
 	private static Scanner sc = new Scanner(System.in);
 	private static int size;
+	private static Sort insertionSort = new InsertionSort();
+	private static Sort selectionSort = new SelectionSort();
+	private static Sort bubbleSort = new BubbleSort();
 
 	public static void askVectorSize() {
 		String value = "";
+		System.out.println();
+		System.out.print("Informe o tamanho do vetor: ");
+		value = sc.next();
 		try {
-			System.out.println();
-			System.out.print("Informe o tamanho do vetor: ");
-			value = sc.next();
 			size = Integer.parseInt(value);
-			Vector.createVector(size);
 		} catch (NumberFormatException e) {
 			throw new DataTypeException("Valor inválido! valor: " + value);
 		}
+		insertionSort.createVector(size);
+		selectionSort.createVector(size);
+		bubbleSort.createVector(size);
 	}
 
 	public static void askVectorValues() {
 		int value = 0;
 		System.out.println();
 		System.out.println("Insira " + size + " valores inteiros no vetor: ");
-		try {
-			for (int i = 0; i < size; i++) {
-				System.out.print((i + 1) + "º: ");
+		for (int i = 0; i < size; i++) {
+			System.out.print((i + 1) + "º: ");
+			try {
 				value = sc.nextInt();
-				Vector.addValue(i, value);
+			} catch (InputMismatchException e) {
+				throw new DataTypeException("Valor inválido! valor: " + value);
 			}
-		} catch (InputMismatchException e) {
-			throw new DataTypeException("Valor inválido! valor: " + value);
+			insertionSort.addValue(i, value);
+			selectionSort.addValue(i, value);
+			bubbleSort.addValue(i, value);
 		}
 	}
 
@@ -56,22 +63,16 @@ public class UI {
 			throw new DataTypeException("Valor inválido! valor: " + option);
 		}
 		System.out.println();
-		System.out.println("Vetor ordenado: ");
 		sortOptionChoosen(option);
-	}
-
-	public static void showOriginalVector() {
-		System.out.println();
-		System.out.println("Vetor original: ");
-		Vector.showSortVector();
 	}
 
 	public static void showExecutionTimeAllSort() {
 		System.out.println();
-		System.out.println("Comparação do tempo de execução entre os métodos de ordenação: (em segundos)");
-		InsertionSort.showExecutionTime();
-		SelectionSort.showExecutionTime();
-		BubbleSort.showExecutionTime();
+		System.out.println();
+		System.out.println("Comparação do tempo de execução entre os métodos de ordenação: (nanosegundos)");
+		System.out.println("Ordenação Inserção = " + insertionSort.getTimeExecution());
+		System.out.println("Ordenação Seleção = " + selectionSort.getTimeExecution());
+		System.out.println("Ordenação Bolha = " + bubbleSort.getTimeExecution());
 	}
 
 	public static boolean showContinuoQuestion() {
@@ -80,29 +81,22 @@ public class UI {
 		return validateContinuoQuestion(sc.next().toLowerCase());
 	}
 	
-	public static void executeAllSortMethods() {
-		int[] vector = Vector.getVector().clone();
-		InsertionSort.insertionSort(vector);
-		SelectionSort.selectionSort(vector);
-		BubbleSort.bubbleSort(vector);
+	public static void executeAllSortsMethods() {
+		insertionSort.ordenation();
+		selectionSort.ordenation();
+		bubbleSort.ordenation();
 	}
 	
 	private static void sortOptionChoosen(int option) {
 		switch (option) {
 			case 1 -> {
-				InsertionSort.showSortVector();
-				System.out.println();
-				InsertionSort.showExecutionTime();
+				System.out.print(insertionSort.toString());
 			}
 			case 2 -> {
-				SelectionSort.showSortVector();
-				System.out.println();
-				SelectionSort.showExecutionTime();
+				System.out.print(selectionSort.toString());
 			}
 			case 3 -> {
-				BubbleSort.showSortVector();
-				System.out.println();
-				BubbleSort.showExecutionTime();
+				System.out.print(bubbleSort.toString());
 			}
 			default -> {
 				throw new ValueChooseException("Opção inválida!");

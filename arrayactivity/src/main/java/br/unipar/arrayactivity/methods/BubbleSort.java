@@ -1,36 +1,22 @@
 package br.unipar.arrayactivity.methods;
 
-public class BubbleSort {
+public class BubbleSort extends Sort {
 
-    private static int[] sortVector;
-    private static long timeStart;
-    private static long timeEnd;
-
-    public static void bubbleSort(int[] vector) {
+	@Override
+    public void ordenation() {
         boolean change;
-        timeStart = System.currentTimeMillis();
+        startTimeExecution();
         do {
             change = false;
-            for (int i = 0; i < vector.length - 1; i++) {
-                if (vector[i] > vector[i + 1]) {
-                    int aux = vector[i];
-                    vector[i] = vector[i + 1];
-                    vector[i + 1] = aux;
+            for (int i = 0; i < getVectorSorted().length - 1; i++) {
+                if (getVectorSorted()[i] > getVectorSorted()[i + 1]) {
+                    int aux = getVectorSorted()[i];
+                    getVectorSorted()[i] = getVectorSorted()[i + 1];
+                    getVectorSorted()[i + 1] = aux;
                     change = true;
                 }
             }
         } while (change);
-        timeEnd = System.currentTimeMillis();
-        sortVector = vector;
-    }
-    
-    public static void showSortVector() {
-        for (int i = 0; i < sortVector.length; i++) {
-            System.out.println("posição[" + i + "] = " + sortVector[i]);
-        }
-    }
-
-    public static void showExecutionTime() {
-    	System.out.println("Tempo de execução por Ordenação Bolha: " + (timeStart - timeEnd));
+        endTimeExecution();
     }
 }
